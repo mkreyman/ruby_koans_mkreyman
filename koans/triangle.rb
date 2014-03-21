@@ -14,10 +14,21 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  case
-    when a == b && a == c && b == c then :equilateral
-    when a != b && a != c && b != c then :scalene
-    else                                 :isosceles
+  if valid_triangle?(a, b, c)
+    case
+      when a == b && a == c && b == c then :equilateral
+      when a != b && a != c && b != c then :scalene
+      else                                 :isosceles
+    end
+  end
+end
+
+def valid_triangle?(a, b, c)
+  a, b, c = [a, b, c].sort
+  if a + b > c
+    true
+  else
+    raise TriangleError
   end
 end
 
